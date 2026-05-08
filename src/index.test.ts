@@ -3,30 +3,41 @@ import { whoopDailyTool } from './tools/whoop_daily.js';
 import { whoopWorkoutsTool } from './tools/whoop_workouts.js';
 import { withingsMeasurementsTool } from './tools/withings_measurements.js';
 import { appleHealthDailyTool } from './tools/apple_health_daily.js';
+import { ouraTools } from './tools/oura.js';
 import { summaryTool } from './tools/summary.js';
 
 const tools = [
   whoopDailyTool,
   whoopWorkoutsTool,
+  ...ouraTools,
   withingsMeasurementsTool,
   appleHealthDailyTool,
   summaryTool,
 ];
 
 describe('tool registry', () => {
-  it('exports exactly 5 tools', () => {
-    expect(tools).toHaveLength(5);
+  it('exports exactly 14 tools', () => {
+    expect(tools).toHaveLength(14);
   });
 
   it('all tools have unique names', () => {
     const names = tools.map((t) => t.name);
-    expect(new Set(names).size).toBe(5);
+    expect(new Set(names).size).toBe(14);
   });
 
   it('all tool names match expected values', () => {
     const names = tools.map((t) => t.name);
     expect(names).toContain('get_whoop_daily');
     expect(names).toContain('get_whoop_workouts');
+    expect(names).toContain('get_oura_daily_sleep');
+    expect(names).toContain('get_oura_sleep');
+    expect(names).toContain('get_oura_daily_readiness');
+    expect(names).toContain('get_oura_daily_activity');
+    expect(names).toContain('get_oura_workouts');
+    expect(names).toContain('get_oura_daily_spo2');
+    expect(names).toContain('get_oura_daily_stress');
+    expect(names).toContain('get_oura_daily_resilience');
+    expect(names).toContain('get_oura_vo2_max');
     expect(names).toContain('get_withings_measurements');
     expect(names).toContain('get_apple_health_daily');
     expect(names).toContain('get_summary');

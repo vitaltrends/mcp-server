@@ -1,6 +1,6 @@
 # @vitaltrends/mcp-server
 
-MCP server for [VitalTrends](https://vitaltrends.net) — query your WHOOP, Withings, and Apple Health data from Claude Desktop using natural language.
+MCP server for [VitalTrends](https://vitaltrends.net) — query your WHOOP, Oura, Withings, and Apple Health data from Claude Desktop using natural language.
 
 ```
 "What was my average HRV last week compared to the week before?"
@@ -61,11 +61,20 @@ Quit and reopen Claude Desktop. You should see a VitalTrends icon in the toolbar
 |---|---|
 | `get_whoop_daily` | Recovery score, HRV, resting heart rate, sleep performance, sleep duration, and strain — one row per day |
 | `get_whoop_workouts` | Workout history with sport name, duration, strain, heart rate, and distance |
+| `get_oura_daily_sleep` | Daily sleep scores and sleep score contributors |
+| `get_oura_sleep` | Sleep sessions with stages, duration, HRV, heart rate, and respiratory rate |
+| `get_oura_daily_readiness` | Daily readiness scores, temperature deviation, and readiness contributors |
+| `get_oura_daily_activity` | Daily activity scores, calories, steps, distance, active minutes, and activity contributors |
+| `get_oura_workouts` | Workout sessions with activity, intensity, source, calories, distance, and timestamps |
+| `get_oura_daily_spo2` | Daily SpO2 averages and breathing disturbance index |
+| `get_oura_daily_stress` | Daily stress, recovery, and day summary data |
+| `get_oura_daily_resilience` | Daily resilience level and resilience contributors |
+| `get_oura_vo2_max` | VO2 max estimates by day |
 | `get_withings_measurements` | Weight and body composition: weight (kg), fat ratio, fat mass, fat-free mass, and muscle mass |
 | `get_apple_health_daily` | Daily Apple Health aggregates: steps, energy (kcal), distance (km), heart rate, HRV, SpO2, and sleep |
 | `get_summary` | Cross-source aggregate: avg/min/max recovery, HRV, RHR, sleep performance, strain, workout count, and body composition |
 
-All tools accept optional `start` and `end` date parameters (`YYYY-MM-DD`) and a `per_page` parameter (1–200, default 50).
+All tools accept optional `start` and `end` date parameters (`YYYY-MM-DD`) and a `per_page` parameter (1–200, default 50). Oura tools also accept `page` for paginated results.
 
 ## Development
 

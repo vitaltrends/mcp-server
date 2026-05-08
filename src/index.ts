@@ -10,11 +10,13 @@ import { whoopDailyTool } from './tools/whoop_daily.js';
 import { whoopWorkoutsTool } from './tools/whoop_workouts.js';
 import { withingsMeasurementsTool } from './tools/withings_measurements.js';
 import { appleHealthDailyTool } from './tools/apple_health_daily.js';
+import { ouraTools } from './tools/oura.js';
 import { summaryTool } from './tools/summary.js';
 
 const tools = [
   whoopDailyTool,
   whoopWorkoutsTool,
+  ...ouraTools,
   withingsMeasurementsTool,
   appleHealthDailyTool,
   summaryTool,

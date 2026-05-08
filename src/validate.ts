@@ -14,3 +14,10 @@ export function validatePerPage(value: unknown): number | undefined {
   if (!Number.isInteger(n)) throw new Error('per_page must be an integer');
   return Math.min(200, Math.max(1, n));
 }
+
+export function validatePage(value: unknown): number | undefined {
+  if (value === undefined || value === null) return undefined;
+  const n = Number(value);
+  if (!Number.isInteger(n)) throw new Error('page must be an integer');
+  return Math.max(1, n);
+}
