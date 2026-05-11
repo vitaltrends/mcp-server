@@ -1,6 +1,6 @@
 {
   "name": "@vitaltrends/mcp-server",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "MCP server for VitalTrends — query your health data from Claude",
   "type": "module",
   "bin": {

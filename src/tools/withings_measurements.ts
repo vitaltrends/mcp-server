@@ -1,5 +1,5 @@
 import type { VitalTrendsClient } from '../client.js';
-import { validateDate, validatePage, validatePerPage } from '../validate.js';
+import { validateDateOrDateTime, validatePage, validatePerPage } from '../validate.js';
 
 export const withingsMeasurementsTool = {
   name: 'get_withings_measurements',
@@ -10,11 +10,11 @@ export const withingsMeasurementsTool = {
     properties: {
       start: {
         type: 'string',
-        description: 'Start date (YYYY-MM-DD).',
+        description: 'Start date or datetime (YYYY-MM-DD or ISO 8601).',
       },
       end: {
         type: 'string',
-        description: 'End date (YYYY-MM-DD).',
+        description: 'End date or datetime (YYYY-MM-DD or ISO 8601).',
       },
       per_page: {
         type: 'number',
@@ -28,9 +28,9 @@ export const withingsMeasurementsTool = {
   },
 
   async handle(args: Record<string, unknown>, client: VitalTrendsClient): Promise<unknown> {
-    return client.get('/withings', {
-      start: validateDate(args.start, 'start'),
-      end: validateDate(args.end, 'end'),
+    return client.get('/withings/measurements', {
+      start: validateDateOrDateTime(args.start, 'start'),
+      end: validateDateOrDateTime(args.end, 'end'),
       per_page: validatePerPage(args.per_page),
       page: validatePage(args.page),
     });

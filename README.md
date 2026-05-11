@@ -59,9 +59,10 @@ Quit and reopen Claude Desktop. You should see a VitalTrends icon in the toolbar
 
 | Tool | Description |
 |---|---|
-| `get_whoop_daily` | Recovery score, HRV, resting heart rate, sleep performance, sleep duration, and strain — one row per day |
+| `get_whoop_daily` | Recovery score, HRV, resting heart rate, sleep performance, sleep duration, strain, and `is_partial` for open current cycles |
 | `get_whoop_recovery_status` | Latest WHOOP recovery freshness, sync, and upstream update timestamps |
 | `get_whoop_workouts` | Workout history with sport name, duration, strain, heart rate, and distance |
+| `get_whoop_sleep` | Sleep sessions with stages and performance scores |
 | `get_unified_workouts` | Cross-source workout feed with WHOOP, Apple Health, Oura, Strava, and Hevy deduplicated into sessions |
 | `get_hevy_workouts` | Hevy workout records with nested exercises and sets |
 | `get_oura_daily_sleep` | Daily sleep scores and sleep score contributors |
@@ -73,11 +74,13 @@ Quit and reopen Claude Desktop. You should see a VitalTrends icon in the toolbar
 | `get_oura_daily_stress` | Daily stress, recovery, and day summary data |
 | `get_oura_daily_resilience` | Daily resilience level and resilience contributors |
 | `get_oura_vo2_max` | VO2 max estimates by day |
-| `get_withings_measurements` | Weight and body composition: weight (kg), fat ratio, fat mass, fat-free mass, and muscle mass |
+| `get_withings_measurements` | Weight and body composition: weight (kg), fat ratio, fat mass, fat-free mass, muscle mass, and bone mass |
+| `get_apple_health_daily_summary` | Single-day Apple Health summary with activity, heart, sleep stages, body metrics, and workout metadata |
 | `get_apple_health_daily` | Daily Apple Health aggregates: steps, energy (kcal), distance (km), heart rate, HRV, SpO2, and sleep |
+| `get_apple_health_samples` | Per-type Apple Health time series with optional metadata for sleep stages and workout details |
 | `get_summary` | Cross-source aggregate: avg/min/max recovery, HRV, RHR, sleep performance, strain, workout count, and body composition |
 
-List tools accept optional `start` and `end` date parameters (`YYYY-MM-DD`), a `per_page` parameter (1–200, default 50), and `page` for paginated results. `get_whoop_recovery_status` does not require arguments.
+List tools accept optional `start` and `end` parameters as `YYYY-MM-DD` dates or ISO 8601 datetimes, a `per_page` parameter (1–200, default 50), and `page` for paginated results. `get_whoop_recovery_status` does not require arguments. `get_apple_health_daily_summary` accepts a single `date` (`YYYY-MM-DD`) and optional comma-separated `types`.
 
 ## Development
 
@@ -99,7 +102,7 @@ npm publish --access public
 
 - The API key is read from the `VITALTRENDS_API_KEY` environment variable and is never logged or included in error output.
 - All requests use HTTPS.
-- Tool arguments are validated before being sent to the API (date format, per_page bounds, page bounds).
+- Tool arguments are validated before being sent to the API (date/datetime format, enum values, per_page bounds, page bounds).
 - Requests time out after 30 seconds.
 
 ## License

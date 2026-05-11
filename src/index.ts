@@ -8,9 +8,12 @@ import {
 import { VitalTrendsClient } from './client.js';
 import { whoopDailyTool } from './tools/whoop_daily.js';
 import { whoopRecoveryStatusTool } from './tools/whoop_recovery_status.js';
+import { whoopSleepTool } from './tools/whoop_sleep.js';
 import { whoopWorkoutsTool } from './tools/whoop_workouts.js';
 import { withingsMeasurementsTool } from './tools/withings_measurements.js';
 import { appleHealthDailyTool } from './tools/apple_health_daily.js';
+import { appleHealthDailySummaryTool } from './tools/apple_health_daily_summary.js';
+import { appleHealthSamplesTool } from './tools/apple_health_samples.js';
 import { hevyWorkoutsTool } from './tools/hevy_workouts.js';
 import { ouraTools } from './tools/oura.js';
 import { summaryTool } from './tools/summary.js';
@@ -20,11 +23,14 @@ const tools = [
   whoopDailyTool,
   whoopRecoveryStatusTool,
   whoopWorkoutsTool,
+  whoopSleepTool,
   unifiedWorkoutsTool,
   hevyWorkoutsTool,
   ...ouraTools,
   withingsMeasurementsTool,
+  appleHealthDailySummaryTool,
   appleHealthDailyTool,
+  appleHealthSamplesTool,
   summaryTool,
 ];
 

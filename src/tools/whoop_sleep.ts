@@ -1,20 +1,20 @@
 import type { VitalTrendsClient } from '../client.js';
 import { validateDateOrDateTime, validatePage, validatePerPage } from '../validate.js';
 
-export const whoopDailyTool = {
-  name: 'get_whoop_daily',
+export const whoopSleepTool = {
+  name: 'get_whoop_sleep',
   description:
-    'Get WHOOP daily data: recovery score, HRV, resting heart rate, sleep performance, sleep duration, strain, and is_partial for the current open cycle when present. Returns one row per day, newest first.',
+    'Get WHOOP sleep sessions with stages and performance scores. Returns newest sleep sessions first.',
   inputSchema: {
     type: 'object' as const,
     properties: {
       start: {
         type: 'string',
-        description: 'Start date or datetime (YYYY-MM-DD or ISO 8601). Defaults to 30 days ago.',
+        description: 'Start date or datetime (YYYY-MM-DD or ISO 8601).',
       },
       end: {
         type: 'string',
-        description: 'End date or datetime (YYYY-MM-DD or ISO 8601). Defaults to today.',
+        description: 'End date or datetime (YYYY-MM-DD or ISO 8601).',
       },
       per_page: {
         type: 'number',
@@ -28,7 +28,7 @@ export const whoopDailyTool = {
   },
 
   async handle(args: Record<string, unknown>, client: VitalTrendsClient): Promise<unknown> {
-    return client.get('/whoop/daily', {
+    return client.get('/whoop/sleep', {
       start: validateDateOrDateTime(args.start, 'start'),
       end: validateDateOrDateTime(args.end, 'end'),
       per_page: validatePerPage(args.per_page),
