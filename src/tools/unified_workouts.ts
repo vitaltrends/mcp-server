@@ -1,10 +1,10 @@
 import type { VitalTrendsClient } from '../client.js';
 import { validateDate, validatePage, validatePerPage } from '../validate.js';
 
-export const appleHealthDailyTool = {
-  name: 'get_apple_health_daily',
+export const unifiedWorkoutsTool = {
+  name: 'get_unified_workouts',
   description:
-    'Get daily Apple Health aggregates: steps, active and basal energy (kcal), distance (km), average heart rate, HRV, resting heart rate, SpO2, and sleep duration (minutes). Returns one row per day, newest first.',
+    'Get a cross-source workout feed with WHOOP, Apple Health, Oura, Strava, and Hevy deduplicated into sessions.',
   inputSchema: {
     type: 'object' as const,
     properties: {
@@ -28,7 +28,7 @@ export const appleHealthDailyTool = {
   },
 
   async handle(args: Record<string, unknown>, client: VitalTrendsClient): Promise<unknown> {
-    return client.get('/apple-health/daily', {
+    return client.get('/workouts/unified', {
       start: validateDate(args.start, 'start'),
       end: validateDate(args.end, 'end'),
       per_page: validatePerPage(args.per_page),

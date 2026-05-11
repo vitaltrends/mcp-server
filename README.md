@@ -1,6 +1,6 @@
 # @vitaltrends/mcp-server
 
-MCP server for [VitalTrends](https://vitaltrends.net) — query your WHOOP, Oura, Withings, and Apple Health data from Claude Desktop using natural language.
+MCP server for [VitalTrends](https://vitaltrends.net) — query your WHOOP, Oura, Hevy, Withings, and Apple Health data from Claude Desktop using natural language.
 
 ```
 "What was my average HRV last week compared to the week before?"
@@ -60,7 +60,10 @@ Quit and reopen Claude Desktop. You should see a VitalTrends icon in the toolbar
 | Tool | Description |
 |---|---|
 | `get_whoop_daily` | Recovery score, HRV, resting heart rate, sleep performance, sleep duration, and strain — one row per day |
+| `get_whoop_recovery_status` | Latest WHOOP recovery freshness, sync, and upstream update timestamps |
 | `get_whoop_workouts` | Workout history with sport name, duration, strain, heart rate, and distance |
+| `get_unified_workouts` | Cross-source workout feed with WHOOP, Apple Health, Oura, Strava, and Hevy deduplicated into sessions |
+| `get_hevy_workouts` | Hevy workout records with nested exercises and sets |
 | `get_oura_daily_sleep` | Daily sleep scores and sleep score contributors |
 | `get_oura_sleep` | Sleep sessions with stages, duration, HRV, heart rate, and respiratory rate |
 | `get_oura_daily_readiness` | Daily readiness scores, temperature deviation, and readiness contributors |
@@ -74,7 +77,7 @@ Quit and reopen Claude Desktop. You should see a VitalTrends icon in the toolbar
 | `get_apple_health_daily` | Daily Apple Health aggregates: steps, energy (kcal), distance (km), heart rate, HRV, SpO2, and sleep |
 | `get_summary` | Cross-source aggregate: avg/min/max recovery, HRV, RHR, sleep performance, strain, workout count, and body composition |
 
-All tools accept optional `start` and `end` date parameters (`YYYY-MM-DD`) and a `per_page` parameter (1–200, default 50). Oura tools also accept `page` for paginated results.
+List tools accept optional `start` and `end` date parameters (`YYYY-MM-DD`), a `per_page` parameter (1–200, default 50), and `page` for paginated results. `get_whoop_recovery_status` does not require arguments.
 
 ## Development
 
@@ -96,7 +99,7 @@ npm publish --access public
 
 - The API key is read from the `VITALTRENDS_API_KEY` environment variable and is never logged or included in error output.
 - All requests use HTTPS.
-- Tool arguments are validated before being sent to the API (date format, per_page bounds).
+- Tool arguments are validated before being sent to the API (date format, per_page bounds, page bounds).
 - Requests time out after 30 seconds.
 
 ## License

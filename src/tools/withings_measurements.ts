@@ -1,5 +1,5 @@
 import type { VitalTrendsClient } from '../client.js';
-import { validateDate, validatePerPage } from '../validate.js';
+import { validateDate, validatePage, validatePerPage } from '../validate.js';
 
 export const withingsMeasurementsTool = {
   name: 'get_withings_measurements',
@@ -20,6 +20,10 @@ export const withingsMeasurementsTool = {
         type: 'number',
         description: 'Results per page (1-200). Defaults to 50.',
       },
+      page: {
+        type: 'number',
+        description: 'Page number (1-indexed). Defaults to 1.',
+      },
     },
   },
 
@@ -28,6 +32,7 @@ export const withingsMeasurementsTool = {
       start: validateDate(args.start, 'start'),
       end: validateDate(args.end, 'end'),
       per_page: validatePerPage(args.per_page),
+      page: validatePage(args.page),
     });
   },
 };

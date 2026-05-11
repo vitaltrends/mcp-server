@@ -1,10 +1,9 @@
 import type { VitalTrendsClient } from '../client.js';
 import { validateDate, validatePage, validatePerPage } from '../validate.js';
 
-export const appleHealthDailyTool = {
-  name: 'get_apple_health_daily',
-  description:
-    'Get daily Apple Health aggregates: steps, active and basal energy (kcal), distance (km), average heart rate, HRV, resting heart rate, SpO2, and sleep duration (minutes). Returns one row per day, newest first.',
+export const hevyWorkoutsTool = {
+  name: 'get_hevy_workouts',
+  description: 'Get Hevy workout records with nested exercises and sets. Returns newest workouts first.',
   inputSchema: {
     type: 'object' as const,
     properties: {
@@ -28,7 +27,7 @@ export const appleHealthDailyTool = {
   },
 
   async handle(args: Record<string, unknown>, client: VitalTrendsClient): Promise<unknown> {
-    return client.get('/apple-health/daily', {
+    return client.get('/workouts/hevy', {
       start: validateDate(args.start, 'start'),
       end: validateDate(args.end, 'end'),
       per_page: validatePerPage(args.per_page),

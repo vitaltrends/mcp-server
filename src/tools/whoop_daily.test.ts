@@ -18,6 +18,7 @@ describe('get_whoop_daily', () => {
       start: '2024-01-01',
       end: '2024-01-31',
       per_page: undefined,
+      page: undefined,
     });
   });
 
@@ -30,6 +31,7 @@ describe('get_whoop_daily', () => {
       start: undefined,
       end: undefined,
       per_page: undefined,
+      page: undefined,
     });
   });
 
@@ -37,5 +39,6 @@ describe('get_whoop_daily', () => {
     expect(whoopDailyTool.name).toBe('get_whoop_daily');
     expect(whoopDailyTool.inputSchema.properties).toHaveProperty('start');
     expect(whoopDailyTool.inputSchema.properties).toHaveProperty('end');
+    expect(whoopDailyTool.inputSchema.properties).toHaveProperty('page');
   });
 });

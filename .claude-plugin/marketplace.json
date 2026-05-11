@@ -1,0 +1,69 @@
+{
+  "name": "vitaltrends",
+  "metadata": {
+    "description": "Claude Code plugins and MCP integrations for VitalTrends.",
+    "version": "1.0.5"
+  },
+  "owner": {
+    "name": "VitalTrends"
+  },
+  "plugins": [
+    {
+      "name": "vitaltrends-mcp",
+      "source": {
+        "source": "npm",
+        "package": "@vitaltrends/mcp-server",
+        "version": "1.0.5"
+      },
+      "description": "Query VitalTrends health data from Claude Code through the VitalTrends MCP server.",
+      "version": "1.0.5",
+      "author": {
+        "name": "VitalTrends"
+      },
+      "homepage": "https://vitaltrends.net",
+      "repository": "https://github.com/vitaltrends/mcp-server",
+      "license": "MIT",
+      "keywords": [
+        "vitaltrends",
+        "mcp",
+        "health",
+        "whoop",
+        "oura",
+        "hevy",
+        "withings",
+        "apple-health"
+      ],
+      "category": "productivity",
+      "tags": [
+        "health",
+        "mcp",
+        "whoop",
+        "oura",
+        "hevy",
+        "withings",
+        "apple-health"
+      ],
+      "userConfig": {
+        "vitaltrends_api_key": {
+          "type": "string",
+          "title": "VitalTrends API key",
+          "description": "Your VitalTrends API key from Settings > Developer.",
+          "sensitive": true,
+          "required": true
+        }
+      },
+      "mcpServers": {
+        "vitaltrends": {
+          "command": "node",
+          "args": [
+            "${CLAUDE_PLUGIN_ROOT}/dist/index.js"
+          ],
+          "env": {
+            "VITALTRENDS_API_KEY": "${user_config.vitaltrends_api_key}"
+          }
+        }
+      },
+      "strict": false
+    }
+  ]
+}
